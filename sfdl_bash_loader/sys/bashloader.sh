@@ -359,6 +359,7 @@ do
                                                 printLinie
 						mkdir -p "$sfdl_files"/error
 						mv "$sfdl" "$sfdl_files"/error/$name.sfdl
+						mv "$sfdl_logs/$ladepfad"_lftp_error.log "$sfdl_files"/error/"$ladepfad"_lftp_error.log
                                                 continue
 					fi
 					if [ -f "$sfdl_logs/$ladepfad"_lftp_index.log ]; then
@@ -627,6 +628,7 @@ do
                                                 		printLinie
 								mkdir -p "$sfdl_files"/error
                                                 		mv "$sfdl" "$sfdl_files"/error/$name.sfdl
+								mv "$sfdl_logs/$ladepfad"_lftp_error.log "$sfdl_files"/error/"$ladepfad"_lftp_error.log
 								continue
                                         		fi
 							if [ -f "$sfdl_logs/$ladepfad"_lftp_index.log ]; then
@@ -802,7 +804,8 @@ do
                     printErr "Leeres (filearray) Array: Keine Dateien gefunden!"
                     printErr "Kein Download moeglich, wird uebersprungen..."
 		    mkdir -p "$sfdl_files"/error
-		    mv "$sfdl" "$sfdl_files"/error/$name.sfdl		    
+		    mv "$sfdl" "$sfdl_files"/error/$name.sfdl
+		    mv "$sfdl_logs/$ladepfad"_lftp_index.log "$sfdl_files"/error/"$ladepfad"_lftp_index.log		    
                     continue
                 fi
 
