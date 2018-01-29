@@ -339,8 +339,10 @@ do
 					sfdl_lftp_download=true
 					
 					i=${bpath[0]}
-                    i="$(echo $i | sed 's/&#32;/ /g')"
+                    			i="$(echo $i | sed 's/&#32;/ /g')"
 					i="$(echo $i | sed 's@/*$@@g')" # danke tenti
+					i="$(echo $i | sed s/\'/\\"\'"/g)"
+				      	i="$(echo $i | sed s/\ /\\"\ "/g)"
 
 					ladepfad="${i##*/}"
 					printText "Lade Index (lftp):" "$ladepfad"
@@ -405,6 +407,8 @@ do
 					for i in "${bpath[@]}"; do
 						i="$(echo $i | sed 's/&#32;/ /g')"
 						i="$(echo $i | sed 's@/*$@@g')" # danke tenti
+						i="$(echo $i | sed s/\'/\\"\'"/g)"
+				      		i="$(echo $i | sed s/\ /\\"\ "/g)"
 						ladepfad="${i##*/}"
 						printText "Lade Index (wget):" "$ladepfad"
 
@@ -610,6 +614,8 @@ do
 							i=${bpath[0]}
                             				i="$(echo $i | sed 's/&#32;/ /g')"
 							i="$(echo $i | sed 's@/*$@@g')" # danke tenti
+							i="$(echo $i | sed s/\'/\\"\'"/g)"
+				      			i="$(echo $i | sed s/\ /\\"\ "/g)"
 							
 							ladepfad="${i##*/}"
 							printText "Lade Index (lftp):" "$ladepfad"
@@ -674,6 +680,8 @@ do
 							for i in "${bpath[@]}"; do
 								i="$(echo $i | sed 's/&#32;/ /g')"
 								i="$(echo $i | sed 's@/*$@@g')" # danke tenti
+								i="$(echo $i | sed s/\'/\\"\'"/g)"
+				      				i="$(echo $i | sed s/\ /\\"\ "/g)"
 								ladepfad="${i##*/}"
 								printText "Lade Index (wget):" "$ladepfad"
 								wget -t $sfdl_wget_max_retry_index --retry-connrefused --no-remove-listing -q -P "$sfdl_downloads/$name" --ftp-user="$username" --ftp-password="$password" "ftp://$host:$port$i/" 2> $sfdl_logs/$ladepfad'_wget_index.log'
