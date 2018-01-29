@@ -342,7 +342,8 @@ do
                     			i="$(echo $i | sed 's/&#32;/ /g')"
 					i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 					i="$(echo $i | sed s/\'/\\"\'"/g)"
-				      	i="$(echo $i | sed s/\ /\\"\ "/g)"
+				      	#i="$(echo $i | sed s/\ /\\"\ "/g)"
+					i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
 
 					ladepfad="${i##*/}"
 					printText "Lade Index (lftp):" "$ladepfad"
@@ -408,7 +409,9 @@ do
 						i="$(echo $i | sed 's/&#32;/ /g')"
 						i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 						i="$(echo $i | sed s/\'/\\"\'"/g)"
-				      		i="$(echo $i | sed s/\ /\\"\ "/g)"
+				      		#i="$(echo $i | sed s/\ /\\"\ "/g)"
+						i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+
 						ladepfad="${i##*/}"
 						printText "Lade Index (wget):" "$ladepfad"
 
@@ -615,8 +618,9 @@ do
                             				i="$(echo $i | sed 's/&#32;/ /g')"
 							i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 							i="$(echo $i | sed s/\'/\\"\'"/g)"
-				      			i="$(echo $i | sed s/\ /\\"\ "/g)"
-							
+				      			#i="$(echo $i | sed s/\ /\\"\ "/g)"
+							i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+
 							ladepfad="${i##*/}"
 							printText "Lade Index (lftp):" "$ladepfad"
 						if [ $proxy == true ]; then
@@ -681,7 +685,9 @@ do
 								i="$(echo $i | sed 's/&#32;/ /g')"
 								i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 								i="$(echo $i | sed s/\'/\\"\'"/g)"
-				      				i="$(echo $i | sed s/\ /\\"\ "/g)"
+				      				#i="$(echo $i | sed s/\ /\\"\ "/g)"
+								i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+
 								ladepfad="${i##*/}"
 								printText "Lade Index (wget):" "$ladepfad"
 								wget -t $sfdl_wget_max_retry_index --retry-connrefused --no-remove-listing -q -P "$sfdl_downloads/$name" --ftp-user="$username" --ftp-password="$password" "ftp://$host:$port$i/" 2> $sfdl_logs/$ladepfad'_wget_index.log'
