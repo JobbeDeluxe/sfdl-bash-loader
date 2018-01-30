@@ -343,7 +343,7 @@ do
 					i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 					i="$(echo $i | sed s/\'/\\"\'"/g)"
 				      	#i="$(echo $i | sed s/\ /\\"\ "/g)"
-					i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+					#i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
 
 					ladepfad="${i##*/}"
 					printText "Lade Index (lftp):" "$ladepfad"
@@ -410,7 +410,7 @@ do
 						i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 						i="$(echo $i | sed s/\'/\\"\'"/g)"
 				      		#i="$(echo $i | sed s/\ /\\"\ "/g)"
-						i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+						#i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
 
 						ladepfad="${i##*/}"
 						printText "Lade Index (wget):" "$ladepfad"
@@ -619,7 +619,7 @@ do
 							i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 							i="$(echo $i | sed s/\'/\\"\'"/g)"
 				      			#i="$(echo $i | sed s/\ /\\"\ "/g)"
-							i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+							#i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
 
 							ladepfad="${i##*/}"
 							printText "Lade Index (lftp):" "$ladepfad"
@@ -686,7 +686,7 @@ do
 								i="$(echo $i | sed 's@/*$@@g')" # danke tenti
 								i="$(echo $i | sed s/\'/\\"\'"/g)"
 				      				#i="$(echo $i | sed s/\ /\\"\ "/g)"
-								i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
+								#i="$(echo $i | sed s/'  '/'\\ \\ '/g)"
 
 								ladepfad="${i##*/}"
 								printText "Lade Index (wget):" "$ladepfad"
