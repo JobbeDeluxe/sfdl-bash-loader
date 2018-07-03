@@ -155,6 +155,12 @@ do
 		
 		echo -ne "{ \"BASHLoader\" : [ { \"version\":\"$loader_version\", \"date\":\"$JSDATE\", \"datetime\":\"$DATETIME\", \"status\":\"running\", \"sfdl\":\"$dlname.sfdl\", \"action\":\"loading\", \"loading_mt_files\":\"$files_mt\", \"loading_total_files\":\"$files_max\", \"loading\":\"$progH|$progB|$progM|$downloaded|$mbsec|$speedtimeX|$speedtime_eta\", \"loading_file_array\":\"$files_json\" } ] }" > "$sfdl_status_json_file"
 	fi
+  
+#Prüfe Downloadabbruch vom server
+if [ -f ""$sfdl_logs/$dlname"_download.log" ]; then
+				downlogok=`cat "$sfdl_logs/$dlname"_download.log | grep "Fehler"`
+				if [ -z "$downlogok" ] ; then
+        
 	if [[ "$downloaded" -le "9" ]]; then
 		printText "Wird geladen:" "$progH ($progB KB / $progM KB) [----------] $downloaded% ($mbsec MB/s) [$speedtimeX]/[$speedtime_eta]"
 	fi
@@ -205,7 +211,12 @@ do
 		sleep 1
 		break
 	fi
-	
+				else
+					echo "Download Fehler!"
+					touch ""$sfdl_logs/$dlname"_abbruch.err"
+					exit 1
+				fi
+fi
 	# schlafen
 	sleep 5
 done
