@@ -39,4 +39,4 @@ Download starten:
 http://sfdl.net/bash-loader/
 
 ## Screenshot
-![Vorschau](https://www1.xup.in/exec/ximg.php?fid=12745943)
+![Vorschau](https://www1.xup.in/exec/ximg.php?fid=38443306)
