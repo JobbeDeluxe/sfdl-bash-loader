@@ -407,12 +407,14 @@ if [ "${#installTools[@]}" != 0 ]; then
 				while [[ -z "$sudopass" ]]
 				do
 					read -p "| Bitte SUDO Passwort eingeben: " sudopass
+					echo "| Bitte warten ..."
 				done
 			fi
 			if [ $usesudo == 1 ]; then
 				echo "| Es wird installiert.... Bitte Warten"
 				echo $sudopass | sudo -S apt-get --yes --force-yes install ${installTools[@]} > /dev/null
 			else
+				echo "| Es wird installiert.... Bitte Warten"
 				apt-get --yes --force-yes install ${installTools[@]} > /dev/null
 			fi
 		else
