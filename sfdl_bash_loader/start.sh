@@ -345,14 +345,6 @@ chkTools()
 		installTools+=($(echo "base64 "))
 	fi
 	
-	# netcat-openbsd
-	netcat=0
-	if hash nc 2>/dev/null; then
-		netcat=1
-	else
-		installTools+=($(echo "netcat "))
-	fi
-	
 	if [ ! -z "$1" ]; then
 		if [ "$1" == "true" ]; then
 			echo "| -- TOOLS ----------------------------- "
@@ -373,7 +365,6 @@ chkTools()
 			#echo "| phpcgi:  $phpcgi"
 			echo "| source:  $source"
 			echo "| base64:  $base64"
-			echo "| netcat:  $netcat"
 			if [ $osxcheck == "Darwin" ]; then
 				echo "| brew:    $brew"
 			fi
