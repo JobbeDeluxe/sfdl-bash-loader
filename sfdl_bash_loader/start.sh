@@ -347,18 +347,10 @@ chkTools()
 	
 	# netcat-openbsd
 	netcat=0
-	if [ $osxcheck == "Darwin" ]; then
-		if hash nc 2>/dev/null; then
-			netcat=1
-		else
-			installTools+=($(echo "netcat "))
-		fi
+	if hash nc 2>/dev/null; then
+		netcat=1
 	else
-		if hash nc.openbsd 2>/dev/null; then
-			netcat=1
-		else
-			installTools+=($(echo "netcat-openbsd "))
-		fi
+		installTools+=($(echo "netcat "))
 	fi
 	
 	if [ ! -z "$1" ]; then
