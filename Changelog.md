@@ -1,0 +1,1 @@
+- Netcat entfernt, da nicht mehr benötigt
