@@ -1175,7 +1175,7 @@ do
 							tmdb_m_firma="$(cat "$sfdl_downloads/$name/tmdb.json" | $useJQ -c -r ".production_companies[0].name")"
 							tmdb_m_collection="$(cat "$sfdl_downloads/$name/tmdb.json" | $useJQ -c -r ".belongs_to_collection.name")"
 							# die filmdatei bekomm einen neuen namen
-							tmdb_filmdatei="$(du -a -S "$sfdl_downloads/$name/"* | sort -nr | head -n 1)" # die groesste datei wird wohl der film sein
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)" # die groesste datei wird wohl der film sein
 							film_ganzefilm="${tmdb_filmdatei##*/}" # filmdatei
 							film_extension="${tmdb_filmdatei##*.}" # dateiendung: mkv, mp4, avi, ...
 							# entferne problematische sonerzeichen aus dem titel
