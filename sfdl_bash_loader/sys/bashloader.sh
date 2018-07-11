@@ -281,6 +281,7 @@ do
 	if [ -f "$sfdl" ]; then
 		# dieses sfdl files wird gerade verarbeitet
 		ladesfdl="${sfdl##*/}"
+		dateiname="${ladesfdl%.sfdl}"
 		bsize=0
 		printText "SFDL Datei:" "$ladesfdl"
 		printJSON "running" "$ladesfdl" "Lese SFDL Datei"
@@ -1301,11 +1302,13 @@ do
 							fi
 						else
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
+							mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname"
 							continue
 						fi
 					fi
 				else
-					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
+					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"							
+					mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname"
 				fi
 			fi
 		fi
