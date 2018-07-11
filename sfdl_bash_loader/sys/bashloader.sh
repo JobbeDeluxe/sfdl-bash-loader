@@ -1303,14 +1303,14 @@ do
 						else
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
 							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
-							mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname"
+							mv '"'$tmdb_filmdatei'"' '"'$sfdl_downloads/$name/$dateiname'"'
 							continue
 						fi
 					fi
 				else
 					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
 					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
-					mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname"
+					mv '"'$tmdb_filmdatei'"' '"'$sfdl_downloads/$name/$dateiname'"'
 				fi
 			fi
 		fi
