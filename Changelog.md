@@ -1,2 +1,3 @@
 - Netcat entfernt, da nicht mehr benötigt
 - TMDB Findet manchmal die Filmdatei nicht #6 
+- Umbennenung nach Dateiname wenn kein Film Gefunden wurde #8
