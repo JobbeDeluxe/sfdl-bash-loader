@@ -16,6 +16,7 @@ sfdl_wget_max_retry_index=$sfdl_wget_max_retry_index				# versuche fuer index la
 sfdl_rar_auspacken=$sfdl_rar_auspacken					# rar archive auspacken true/false
 sfdl_rar_entfernen=$sfdl_rar_entfernen					# rar archive nach dem auspacken entfernen true/false
 sfdl_xrel_tmdb_mod=$sfdl_xrel_tmdb_mod					# lade daten von xrel.to und tmdb.org true/false
+renamet=$renamet						# Zeit in Sekunden die zu warten vor Umbennenung Wenn tmbd Fählschlägt; 0=Kein Warten. false=keine umbennenung
 sfdl_wget_multithread=$sfdl_wget_multithread				# true = es werden gleichzeitig mehrere dateien geladen
 sfdl_wget_multithreads=$sfdl_wget_multithreads				# sfdl = MaxDownloadThreads, sfdl_wget_multithreads=10 z.B. ueberschreibt die vorgabe durch MaxDownloadThreads und oeffnet 10 gleichzeitige verbindungen
 sfdl_eigenwerbung=$sfdl_eigenwerbung					# schreibt werbung in den speedreport
