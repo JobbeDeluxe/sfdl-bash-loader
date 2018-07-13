@@ -12,7 +12,7 @@
 # 8888888P" d88P     888  "Y8888P"  888    888        88888888 "Y88P"  "Y888888  "Y88888  "Y8888  888
 # ==========================================================================================================
 # sfdl bash loader version
-sfdl_version="3.20"
+sfdl_version="3.21"
 
 # pfad definieren
 IFSDEFAULT=$IFS
@@ -281,6 +281,7 @@ do
 	if [ -f "$sfdl" ]; then
 		# dieses sfdl files wird gerade verarbeitet
 		ladesfdl="${sfdl##*/}"
+		dateiname="${ladesfdl%.sfdl}"
 		bsize=0
 		printText "SFDL Datei:" "$ladesfdl"
 		printJSON "running" "$ladesfdl" "Lese SFDL Datei"
@@ -1175,7 +1176,7 @@ do
 							tmdb_m_firma="$(cat "$sfdl_downloads/$name/tmdb.json" | $useJQ -c -r ".production_companies[0].name")"
 							tmdb_m_collection="$(cat "$sfdl_downloads/$name/tmdb.json" | $useJQ -c -r ".belongs_to_collection.name")"
 							# die filmdatei bekomm einen neuen namen
-							tmdb_filmdatei="$(du -a -S "$sfdl_downloads/$name/"* | sort -nr | head -n 1)" # die groesste datei wird wohl der film sein
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)" # die groesste datei wird wohl der film sein
 							film_ganzefilm="${tmdb_filmdatei##*/}" # filmdatei
 							film_extension="${tmdb_filmdatei##*.}" # dateiendung: mkv, mp4, avi, ...
 							# entferne problematische sonerzeichen aus dem titel
@@ -1301,11 +1302,84 @@ do
 							fi
 						else
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
+							film_extension="${tmdb_filmdatei##*.}"
+							film_ganzefilm="${tmdb_filmdatei##*/}"#
+							if [ $renamet != false ]; then
+							if [ $renamet -gt 1 ]; then
+								echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+								while true
+								do
+								read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+								case $inputt in
+    								[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+								echo -e "\033[34mOk\033[0m"
+								break
+								;;
+
+								[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								'')
+ 								echo "Kein Eingabe Gefunden."
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								*)
+								echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 								;;
+								esac
+								done
+							else
+							mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+							fi
+							else
 							continue
+							fi
 						fi
 					fi
 				else
 					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
+					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
+					film_extension="${tmdb_filmdatei##*.}"
+					film_ganzefilm="${tmdb_filmdatei##*/}"
+					if [ $renamet != false ]; then
+					if [ $renamet -gt 1 ]; then
+						echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+						while true
+						do
+						read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+						case $inputt in
+    						[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+						echo -e "\033[34mOk\033[0m"
+						break
+						;;
+
+						[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+						mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+						break
+						;;
+
+						'')
+ 						echo "Kein Eingabe Gefunden."
+						mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+						break
+						;;
+
+						*)
+						echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 						;;
+						esac
+						done
+					else
+					mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+					fi
+					fi
 				fi
 			fi
 		fi
