@@ -1304,7 +1304,37 @@ do
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
 							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
 							film_extension="${tmdb_filmdatei##*.}"
+							if [ $renamet -gt 1 ]; then
+								echo -e "Aus \033[34m$tmdb_filmdatei\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+								while true
+								do
+								read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+								case $inputt in
+    								[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+								echo -e "\033[34mOk\033[0m"
+								break
+								;;
+
+								[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								'')
+ 								echo "Kein Eingabe Gefunden."
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								*)
+								echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 								;;
+								esac
+								done
+							else
 							mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+							fi
 							continue
 						fi
 					fi
@@ -1312,7 +1342,37 @@ do
 					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
 					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
 					film_extension="${tmdb_filmdatei##*.}"
+					if [ $renamet -gt 1 ]; then
+						echo -e "Aus \033[34m$tmdb_filmdatei\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+						while true
+						do
+						read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+						case $inputt in
+    						[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+						echo -e "\033[34mOk\033[0m"
+						break
+						;;
+
+						[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+						mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+						break
+						;;
+
+						'')
+ 						echo "Kein Eingabe Gefunden."
+						mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+						break
+						;;
+
+						*)
+						echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 						;;
+						esac
+						done
+					else
 					mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+					fi
 				fi
 			fi
 		fi
