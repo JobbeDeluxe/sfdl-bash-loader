@@ -1,3 +1,6 @@
+3.22:
+- History kann aktiviert werden.
+
 3.21:
 - Netcat entfernt, da nicht mehr benötigt
 - TMDB Findet manchmal die Filmdatei nicht #6 
