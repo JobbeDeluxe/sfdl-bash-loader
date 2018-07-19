@@ -1394,7 +1394,7 @@ do
 			"$uscript_folder"/after.sh
 			echo "Userscript wurde ausgeführt"
 		fi
-		if [ History == true]; then
+		if [ History == true ]; then
 		datum=$(date +"%y-%m-%d %H:%M:%S")
 		echo "$datum $name" >> $sfdl_logs/History.txt
 		fi
