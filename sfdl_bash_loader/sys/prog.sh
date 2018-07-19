@@ -52,6 +52,7 @@ while [ : ]
 do
 	name_chmod="$1"; echo ${var// /\ }
 	chmod -R $sfdl_chmod "$name_chmod"
+	IFS=$'\n'
 	sizeB="$(find $1 -type f -printf '%s\n' | awk '{ total += $1 }; END { printf "%.0f",total }')"
 	if [ -z "$sizeB" ]
                 then
@@ -157,6 +158,7 @@ do
 	fi
   
 #Prüfe Downloadabbruch vom server
+IFS=$'\n'
 if [ -f ""$sfdl_logs/$dlname"_download.log" ]; then
 				downlogok=`cat "$sfdl_logs/$dlname"_download.log | grep "Fehler"`
 				if [ -z "$downlogok" ] ; then
