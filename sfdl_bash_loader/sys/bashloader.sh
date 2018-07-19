@@ -12,7 +12,7 @@
 # 8888888P" d88P     888  "Y8888P"  888    888        88888888 "Y88P"  "Y888888  "Y88888  "Y8888  888
 # ==========================================================================================================
 # sfdl bash loader version
-sfdl_version="3.21"
+sfdl_version="3.22"
 
 # pfad definieren
 IFSDEFAULT=$IFS
@@ -1393,6 +1393,10 @@ do
 			echo "Userscript wird ausgeführt. Bitte warten...."
 			"$uscript_folder"/after.sh
 			echo "Userscript wurde ausgeführt"
+		fi
+		if [ History == true]; then
+		datum=$(date +"%y-%m-%d %H:%M:%S")
+		echo "$datum $name" >> $sfdl_logs/History.txt
 		fi
 	else
 		if [ "$WEBSERVER" == "ONLINE" ]; then
