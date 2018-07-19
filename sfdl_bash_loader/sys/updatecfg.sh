@@ -22,6 +22,7 @@ sfdl_wget_multithreads=$sfdl_wget_multithreads				# sfdl = MaxDownloadThreads, s
 sfdl_eigenwerbung=$sfdl_eigenwerbung					# schreibt werbung in den speedreport
 sfdl_chmod=$sfdl_chmod						# Rechte verteilung der Daten nach und während dem download/ nach dem Entpacken
 sfdl_update=$sfdl_update						# ask = fragen, true = immer updaten, false = nicht updaten
+History=$History						# true = es wird in /logs/History.txt der Download verlauf mit Datum angelegt.
 #==========================================================================================================
 uscript_folder=\"$uscript_folder\"   			#absoluter Pfad zu script Ordner
 uscript_befor=$uscript_befor               			#Userscript vor dem Download ausführen. true zum aktivieren
