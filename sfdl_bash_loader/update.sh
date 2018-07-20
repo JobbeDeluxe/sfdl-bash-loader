@@ -149,7 +149,9 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		chmod +x "$pwd/sys/updatecfg.sh"
 		"$pwd/sys/updatecfg.sh" "$pwd/backup/loader.cfg.new" "$pwd/backup/loader.cfg.bak" "$pwd/sys/force.cfg" "$pwd/sys/loader.cfg"
 		cp -rf "$pwd/backup/passwords.txt" "$pwd/sys/passwords.txt"
-		cp -rf "$pwd/backup/History.txt" "$pwd/sys/logs/History.txt"
+		if [ -f "$pwd/backup/History.txt" ]; then
+			cp -rf "$pwd/backup/History.txt" "$pwd/sys/logs/History.txt"
+		fi
 		rm -rf "$pwd/backup/"
 	fi
 	
