@@ -12,7 +12,7 @@
 # 8888888P" d88P     888  "Y8888P"  888    888        88888888 "Y88P"  "Y888888  "Y88888  "Y8888  888
 # ==========================================================================================================
 # sfdl bash loader version
-sfdl_version="3.21"
+sfdl_version="3.22"
 
 # pfad definieren
 IFSDEFAULT=$IFS
@@ -652,12 +652,12 @@ do
 							printText "Lade Index (lftp):" "$ladepfad"
 								if [ $proxy == true ]; then
 									if [ $proxyauth == true ]; then
-										lftp -p $port -u "$username","$password" -e "set ssl:verify-certificate no; set ftp:proxy $proxytyp://$proxyuser:$proxypass@$proxyip:$proxyport; set net:timeout 30; set net:reconnect-interval-base 5; set net:max-retries 2; set ftp:ssl-allow no; open; open && find -l '$i' && exit" $host 2> $sfdl_logs/$ladepfad'_lftp_error.log' 1> $sfdl_logs/$ladepfad'_lftp_index.log'
+										lftp -p $port -u "$username","$password" -e "set ftp:use-feat no; set ssl:verify-certificate no; set ftp:proxy $proxytyp://$proxyuser:$proxypass@$proxyip:$proxyport; set net:timeout 30; set net:reconnect-interval-base 5; set net:max-retries 2; set ftp:ssl-allow no; open; open && find -l '$i' && exit" $host 2> $sfdl_logs/$ladepfad'_lftp_error.log' 1> $sfdl_logs/$ladepfad'_lftp_index.log'
 									else
-										lftp -p $port -u "$username","$password" -e "set ssl:verify-certificate no; set ftp:proxy $proxytyp://$proxyip:$proxyport; set net:timeout 30; set net:reconnect-interval-base 5; set net:max-retries 2; set ftp:ssl-allow no; open && find -l '$i' && exit" $host 2> $sfdl_logs/$ladepfad'_lftp_error.log' 1> $sfdl_logs/$ladepfad'_lftp_index.log'
+										lftp -p $port -u "$username","$password" -e "set ftp:use-feat no; set ssl:verify-certificate no; set ftp:proxy $proxytyp://$proxyip:$proxyport; set net:timeout 30; set net:reconnect-interval-base 5; set net:max-retries 2; set ftp:ssl-allow no; open && find -l '$i' && exit" $host 2> $sfdl_logs/$ladepfad'_lftp_error.log' 1> $sfdl_logs/$ladepfad'_lftp_index.log'
 									fi
 								else
-									lftp -p $port -u "$username","$password" -e "set ssl:verify-certificate no; set net:timeout 30; set net:reconnect-interval-base 5; set net:max-retries 2; set ftp:ssl-allow no; open && find -l '$i' && exit" $host 2> $sfdl_logs/$ladepfad'_lftp_error.log' 1> $sfdl_logs/$ladepfad'_lftp_index.log'
+									lftp -p $port -u "$username","$password" -e "set ftp:use-feat no; set ssl:verify-certificate no; set net:timeout 30; set net:reconnect-interval-base 5; set net:max-retries 2; set ftp:ssl-allow no; open && find -l '$i' && exit" $host 2> $sfdl_logs/$ladepfad'_lftp_error.log' 1> $sfdl_logs/$ladepfad'_lftp_index.log'
 								fi
 							if [ -s "$sfdl_logs/$ladepfad"_lftp_error.log ]; then
                                                 		printErr "FEHLER: Es konnte kein Index der FTP-Daten erstellt werden!"
@@ -858,12 +858,12 @@ do
 				echo -n "${#filearray[@]}|$maxdl" > $sfdl_logs/dl.txt
 				if [ $proxy == true ]; then
 						if [ $proxyauth == true ]; then
-							lftp -p $port -u "$username","$password" -e 'set ssl:verify-certificate no; set ftp:proxy "'$proxytyp'"://"'$proxyuser'":"'$proxypass'"@"'$proxyip'":"'$proxyport'"; set ftp:ssl-allow no; mirror --continue --parallel="'$maxdl'" -vvv --log="'$sfdl_logs/$name'_lftp.log" "'$DLPATH'" "'$sfdl_downloads/$name'"; exit' $host > "$sfdl_logs/$name"_download.log | "$sfdl_sys/prog.sh" "$sfdl_downloads/$name" "$bsize" "$pwd" "${filearray[@]}"
+							lftp -p $port -u "$username","$password" -e 'set ftp:use-feat no; set ssl:verify-certificate no; set ftp:proxy "'$proxytyp'"://"'$proxyuser'":"'$proxypass'"@"'$proxyip'":"'$proxyport'"; set ftp:ssl-allow no; mirror --continue --parallel="'$maxdl'" -vvv --log="'$sfdl_logs/$name'_lftp.log" "'$DLPATH'" "'$sfdl_downloads/$name'"; exit' $host > "$sfdl_logs/$name"_download.log | "$sfdl_sys/prog.sh" "$sfdl_downloads/$name" "$bsize" "$pwd" "${filearray[@]}"
 							else
-								lftp -p $port -u "$username","$password" -e 'set ssl:verify-certificate no; set ftp:proxy "'$proxytyp'"://"'$proxyip'":"'$proxyport'"; set ftp:ssl-allow no; mirror --continue --parallel="'$maxdl'" -vvv --log="'$sfdl_logs/$name'_lftp.log" "'$DLPATH'" "'$sfdl_downloads/$name'"; exit' $host > "$sfdl_logs/$name"_download.log | "$sfdl_sys/prog.sh" "$sfdl_downloads/$name" "$bsize" "$pwd" "${filearray[@]}"
+								lftp -p $port -u "$username","$password" -e 'set ftp:use-feat no; set ssl:verify-certificate no; set ftp:proxy "'$proxytyp'"://"'$proxyip'":"'$proxyport'"; set ftp:ssl-allow no; mirror --continue --parallel="'$maxdl'" -vvv --log="'$sfdl_logs/$name'_lftp.log" "'$DLPATH'" "'$sfdl_downloads/$name'"; exit' $host > "$sfdl_logs/$name"_download.log | "$sfdl_sys/prog.sh" "$sfdl_downloads/$name" "$bsize" "$pwd" "${filearray[@]}"
 							fi
 				else
-					lftp -p $port -u "$username","$password" -e 'set ssl:verify-certificate no; set ftp:ssl-allow no; mirror --continue --parallel="'$maxdl'" -vvv --log="'$sfdl_logs/$name'_lftp.log" "'$DLPATH'" "'$sfdl_downloads/$name'"; exit' $host > "$sfdl_logs/$name"_download.log | "$sfdl_sys/prog.sh" "$sfdl_downloads/$name" "$bsize" "$pwd" "${filearray[@]}"
+					lftp -p $port -u "$username","$password" -e 'set ftp:use-feat no; set ssl:verify-certificate no; set ftp:ssl-allow no; mirror --continue --parallel="'$maxdl'" -vvv --log="'$sfdl_logs/$name'_lftp.log" "'$DLPATH'" "'$sfdl_downloads/$name'"; exit' $host > "$sfdl_logs/$name"_download.log | "$sfdl_sys/prog.sh" "$sfdl_downloads/$name" "$bsize" "$pwd" "${filearray[@]}"
 				fi
 				else
 				printErr "Es wurde kein lftp gefunden! Bitte lftp installieren!"
@@ -1176,7 +1176,7 @@ do
 							tmdb_m_firma="$(cat "$sfdl_downloads/$name/tmdb.json" | $useJQ -c -r ".production_companies[0].name")"
 							tmdb_m_collection="$(cat "$sfdl_downloads/$name/tmdb.json" | $useJQ -c -r ".belongs_to_collection.name")"
 							# die filmdatei bekomm einen neuen namen
-							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)" # die groesste datei wird wohl der film sein
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)" # die groesste datei wird wohl der film sein
 							film_ganzefilm="${tmdb_filmdatei##*/}" # filmdatei
 							film_extension="${tmdb_filmdatei##*.}" # dateiendung: mkv, mp4, avi, ...
 							# entferne problematische sonerzeichen aus dem titel
@@ -1302,7 +1302,7 @@ do
 							fi
 						else
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
-							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 							film_extension="${tmdb_filmdatei##*.}"
 							film_ganzefilm="${tmdb_filmdatei##*/}"#
 							if [ $renamet != false ]; then
@@ -1344,7 +1344,7 @@ do
 					fi
 				else
 					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
-					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs ls -S | head -1)"
+					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 					film_extension="${tmdb_filmdatei##*.}"
 					film_ganzefilm="${tmdb_filmdatei##*/}"
 					if [ $renamet != false ]; then
@@ -1393,6 +1393,10 @@ do
 			echo "Userscript wird ausgeführt. Bitte warten...."
 			"$uscript_folder"/after.sh
 			echo "Userscript wurde ausgeführt"
+		fi
+		if [ $History == true ]; then
+		datum=$(date +"%y-%m-%d %H:%M:%S")
+		echo "$datum $name" >> $sfdl_logs/History.txt
 		fi
 	else
 		if [ "$WEBSERVER" == "ONLINE" ]; then
