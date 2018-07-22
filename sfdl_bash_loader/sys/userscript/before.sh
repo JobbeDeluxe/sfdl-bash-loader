@@ -7,7 +7,7 @@
 #pwd="`dirname \"$0\"`"
 #cd $pwd/../../sfdl
 #rename 's/\.German(.*).sfdl$/.sfdl/i' *
-#rename 's/[^(](\d{4,})/\($1\)/g' *
+#rename 's/[^(](\d{4,})/ \($1\)/g' *
 #rename 's/\.S(\d{2})E(\d{2})/ - S$1E$2 -/g' *
 #rename 's/\./ /g' *
 #rename 's/ sfdl/.sfdl/g' *
