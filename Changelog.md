@@ -1,3 +1,6 @@
+3.23:
+- Kategorien hinzugefügt (noch nicht fertig implementiert)
+
 3.22:
 - History kann aktiviert werden.
 - Bugfix: Downloadname enthält Leerzeichen. Fehler beim anzeigen der Downloadanzeige. #17
