@@ -1383,7 +1383,10 @@ do
 				fi
 			fi
 		fi
-
+		
+		if [ $kategorie == true ]; then
+			"$pwd/shine.sh" "$sfdl_downloads/$name/$dateiname.$film_extension"
+		fi
 		# ende
 		printLinie
 
