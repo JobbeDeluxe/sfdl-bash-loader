@@ -1385,7 +1385,7 @@ do
 		fi
 		
 		if [ $kategorie == true ]; then
-			"$pwd/shine.sh" "$sfdl_downloads/$name/$dateiname.$film_extension"
+			source "$pwd/shine.sh"
 		fi
 		# ende
 		printLinie
