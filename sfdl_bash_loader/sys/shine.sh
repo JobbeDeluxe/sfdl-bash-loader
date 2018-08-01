@@ -10,7 +10,6 @@ if [ -z "$tmdb_filmdatei" ]; then
 	tmdb_filmdatei="$sfdl_downloads/$name/$dateiname.$film_extension"
 fi
 if [ $kategorie == true ]; then
-
 	if [ $kat == film ]; then
 		if [ $unterordner == false ]; then
 			mv "$tmdb_filmdatei" "$sfdl_downloads/$Film/$sfdl_downloads/$name/$dateiname.$film_extension"
