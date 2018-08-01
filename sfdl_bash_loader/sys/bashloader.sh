@@ -1302,10 +1302,10 @@ do
 							fi
 						else
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
+							if [ $renamet != false ]; then
 							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 							film_extension="${tmdb_filmdatei##*.}"
 							film_ganzefilm="${tmdb_filmdatei##*/}"#
-							if [ $renamet != false ]; then
 							if [ $renamet -gt 1 ]; then
 								echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
 								while true
@@ -1344,10 +1344,10 @@ do
 					fi
 				else
 					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
+					if [ $renamet != false ]; then
 					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 					film_extension="${tmdb_filmdatei##*.}"
 					film_ganzefilm="${tmdb_filmdatei##*/}"
-					if [ $renamet != false ]; then
 					if [ $renamet -gt 1 ]; then
 						echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
 						while true
