@@ -14,7 +14,9 @@ if [ $kategorie == true ]; then
 		if [ $unterordner == false ]; then
 			mv "$tmdb_filmdatei" "$sfdl_downloads/$Film/$film_ganzefilm"
 			mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/"$name"_speedreport.txt"
-			rm -dr $sfdl_downloads/$name
+			if [ $removeold == true ]; then			
+				rm -dr $sfdl_downloads/$name
+			fi
 		else
 			mv "$sfdl_downloads/$name" "$sfdl_downloads/$Film/$name"
 		fi
