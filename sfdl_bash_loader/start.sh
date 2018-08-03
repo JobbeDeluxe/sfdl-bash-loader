@@ -464,7 +464,7 @@ if [ "${#installTools[@]}" != 0 ]; then
 		sleep 5
 		if [ ! -z "$1" ]; then
 		export kat=$1
-	fi
+		fi
 		exec "$pwd/sys/bashloader.sh"
 	fi
 else
