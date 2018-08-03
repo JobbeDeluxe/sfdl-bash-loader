@@ -14,7 +14,7 @@ fi
 if [ $kategorie == true ]; then
 	if [ $kat == "film" ]; then
 		if [ $unterordner == false ]; then
-			mv "$tmdb_filmdatei" "$sfdl_downloads/$Film/$dateiname.$film_extension"
+			mv "$tmdb_filmdatei" "$sfdl_downloads/$Film/$film_ganzefilm" ###der name stimmt noch nicht... neue datei suche??
 			mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/"$name"_speedreport.txt"
 			if [ $removeold == true ]; then			
 				rm -dr $sfdl_downloads/$name
