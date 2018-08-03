@@ -2,8 +2,6 @@
 
 pwd="`dirname \"$0\"`"
 source "$pwd/kategorie.cfg"
-
-echo "$kat"
 if [ -z "$tmdb_filmdatei" ]; then
 	tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 	film_extension="${tmdb_filmdatei##*.}"
