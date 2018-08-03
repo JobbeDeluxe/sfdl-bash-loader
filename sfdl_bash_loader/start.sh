@@ -156,6 +156,9 @@ fi
 if [ -f "$pwd/sys/setup.txt" ]; then
 	echo "Starte..."
 	checkupdate
+	if [ ! -z "$1" ]; then
+		export kat=$1
+	fi
 	exec "$pwd/sys/bashloader.sh"
 	exit 0
 fi
@@ -459,6 +462,9 @@ if [ "${#installTools[@]}" != 0 ]; then
 		echo "| Starte BASH-Loader in 5 Sekunden ..."
         echo 1 > "$pwd/sys/setup.txt"
 		sleep 5
+		if [ ! -z "$1" ]; then
+		export kat=$1
+	fi
 		exec "$pwd/sys/bashloader.sh"
 	fi
 else
@@ -481,5 +487,8 @@ else
 	echo "| Starte BASH-Loader in 5 Sekunden ..."
 	echo 1 > "$pwd/sys/setup.txt"
 	sleep 5
+	if [ ! -z "$1" ]; then
+		export kat=$1
+	fi
 	exec "$pwd/sys/bashloader.sh"
 fi
