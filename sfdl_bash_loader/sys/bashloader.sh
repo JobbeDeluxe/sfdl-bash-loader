@@ -1385,7 +1385,19 @@ do
 		fi
 		
 		if [ $kategorie == true ]; then
+			if [ ! -z $kat ]; then
 			source "$pwd/shine.sh"
+		else
+			echo -e "Keine Kategorie angegeben, bitte wähle:\n1) film\n2) serie\n3) Abbrechen"
+			read -t 30 -r -p "" read_kat
+			case "$read_kat" in
+			1) kat=film
+			source "$pwd/shine.sh";;
+			2) kat=serie
+			source "$pwd/shine.sh";;
+			3) ;;
+			esac
+			fi
 		fi
 		# ende
 		printLinie
