@@ -1,5 +1,7 @@
 3.23:
 - Kategorien hinzugefügt (noch nicht fertig implementiert)
+- Bugfix: Login nicht möglich (Meldung: 530 Not logged in.) #18 Bei nutzen ohne user.
+- Add: Bei neuen sfdl während des ladens, werden die alten einstellungen beim neustart übernommen ( Wichtig bei Katigorien)
 
 3.22:
 - History kann aktiviert werden.
