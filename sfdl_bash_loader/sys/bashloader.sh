@@ -1431,7 +1431,7 @@ if [ `ls -a "$sfdl_files"/*.sfdl 2>/dev/null | wc -l` != 0 ] ; then
 	fi
 	printText "INFO:" "Weitere SFDL Dateien gefunden! Starte in 5 Sekunden ..."
 	sleep 5
-	exec "$pwd/bashloader.sh"
+	source "$pwd/bashloader.sh"
 	exit 0
 else
 	printText "Alle Downloads abgeschlossen"
