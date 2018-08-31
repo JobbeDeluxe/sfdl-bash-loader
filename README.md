@@ -35,7 +35,7 @@ zB.:
 ./start.sh film
 ```
 Bitte Kategorien in sys/kategorie.cfg eintragen!
-Es kann immer nur EINE Kattegorie pro Download angegeben werden. Alle sfdl im ordner werden dann mit dieser Kattegorie abgearbeitet.
+Es kann immer nur EINE Kattegorie pro Download angegeben werden. Alle sfdl im ordner werden dann mit dieser Kategorie abgearbeitet.
 
 
 ## Kompatibilität (getestet)
