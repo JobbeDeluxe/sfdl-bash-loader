@@ -8,12 +8,12 @@ katname=kat_$kat
 
 if [ $kategorie == true ]; then
 	if [ $unterordner == false ]; then
-		mv "$tmdb_filmdatei" "$sfdl_downloads/${!kategorie}/$film_ganzefilm"
+		mv "$tmdb_filmdatei" "$sfdl_downloads/${!katname}/$film_ganzefilm"
 		mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/"$name"_speedreport.txt"
 		if [ $removeold == true ]; then			
 			rm -dr $sfdl_downloads/$name
 		fi
 	else
-		mv "$sfdl_downloads/$name" "$sfdl_downloads/${!kategorie}/$name"
+		mv "$sfdl_downloads/$name" "$sfdl_downloads/${!katname}/$name"
 	fi
 fi
