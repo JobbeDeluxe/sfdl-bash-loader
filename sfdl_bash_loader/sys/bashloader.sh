@@ -1388,7 +1388,7 @@ do
 			if [ ! -z $kat ]; then
 			source "$pwd/shine.sh"
 		else
-			echo -e "Keine Kategorie angegeben, bitte wähle:\n1) film\n2) serie\n3) Selber Eingeben\n 4) Abbrechen. nach 60  Sekunden wird automatisch abggebrochen"
+			echo -e "Keine Kategorie angegeben, bitte wähle:\n1) film\n2) serie\n3) Selber Eingeben\n 4) Abbrechen. nach 60  Sekunden wird automatisch abggebrochen\n"
 			read -t 60 -r -p "" read_kat
 			case "$read_kat" in
 			1) kat=film
