@@ -14,6 +14,9 @@ if [ $kategorie == true ]; then
 		echo "Verschiebe Film...."
 		mv "$tmdb_filmdatei" "$sfdl_downloads/${!katname}/$film_ganzefilm"
 		mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/Speedreports/"$name"_speedreport.txt"
+			if [ -d "$sfdl_downloads/$name/kodi" ] && [ kodi_behalten == true ]; then
+				mv "$sfdl_downloads/$name/kodi" "$sfdl_downloads/${!katname}/kodi_$film_ganzefilm"
+			fi
 		if [ $removeold == true ]; then	
 			echo "Entferne alten Ordner...."		
 			rm -dr $sfdl_downloads/$name
