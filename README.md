@@ -28,6 +28,14 @@ Download starten:
 ```
 ./start.sh
 ```
+## Starten mit Kategorie
+```
+./start.sh "name derKattegorie"
+zB.:
+./start.sh film
+```
+Bitte Kategorien in sys/kategorie.cfg eintragen!
+
 
 ## Kompatibilität (getestet)
 -Linux  
