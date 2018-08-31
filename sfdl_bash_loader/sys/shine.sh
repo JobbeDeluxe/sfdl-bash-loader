@@ -5,7 +5,10 @@ source "$pwd/kategorie.cfg"
 	film_extension="${tmdb_filmdatei##*.}"
 	film_ganzefilm="${tmdb_filmdatei##*/}"
 katname=kat_$kat
-
+if [ -z ${!katname} ]; then
+	echo "Kategorie nicht gefunden, bitte in der $pwd/kategorie.cfg anlegen nutze stattdessen \"film\""
+	katname=kat_film
+fi
 if [ $kategorie == true ]; then
 	mkdir -p "$sfdl_downloads/${!katname}"
 	echo "Kategorie $kat wird genommen und in den Ordner ${!katname} verschoben"
