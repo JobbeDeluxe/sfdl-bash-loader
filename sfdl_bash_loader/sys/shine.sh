@@ -7,13 +7,19 @@ source "$pwd/kategorie.cfg"
 katname=kat_$kat
 
 if [ $kategorie == true ]; then
+	mkdir -p "$sfdl_downloads/${!katname}"
+	echo "Kategorie $kat wird genommen und in den Ordner ${!katname} verschoben"
 	if [ $unterordner == false ]; then
+		mkdir -p "$sfdl_downloads/Speedreports"
+		echo "Verschiebe Film...."
 		mv "$tmdb_filmdatei" "$sfdl_downloads/${!katname}/$film_ganzefilm"
-		mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/"$name"_speedreport.txt"
-		if [ $removeold == true ]; then			
+		mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/Speedreports/"$name"_speedreport.txt"
+		if [ $removeold == true ]; then	
+			echo "Entferne alten Ordner...."		
 			rm -dr $sfdl_downloads/$name
 		fi
 	else
 		mv "$sfdl_downloads/$name" "$sfdl_downloads/${!katname}/$name"
 	fi
 fi
+echo "Film Verschoben: $sfdl_downloads/${!katname}/$film_ganzefilm"
