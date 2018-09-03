@@ -1,5 +1,5 @@
 3.23:
-- Kategorien hinzugefügt (noch nicht fertig implementiert)
+- Kategorien hinzugefügt
 - Bugfix: Login nicht möglich (Meldung: 530 Not logged in.) #18 Bei nutzen ohne user.
 - Add: Bei neuen sfdl während des ladens, werden die alten einstellungen beim automatischen neustart übernommen ( Wichtig bei Katigorien)
 - Add: Entfernt alle daten die "sample" im namen haben im Downlaod ordner. (aktiviern in der loader.cfg)
