@@ -12,7 +12,7 @@
 # 8888888P" d88P     888  "Y8888P"  888    888        88888888 "Y88P"  "Y888888  "Y88888  "Y8888  888
 # ==========================================================================================================
 # sfdl bash loader version
-sfdl_version="3.22"
+sfdl_version="3.23"
 
 # pfad definieren
 IFSDEFAULT=$IFS
@@ -1302,10 +1302,10 @@ do
 							fi
 						else
 							printErr "TMDB.org: FEHLER kann tmdb.json nicht finden!"
+							if [ $renamet != false ]; then
 							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 							film_extension="${tmdb_filmdatei##*.}"
 							film_ganzefilm="${tmdb_filmdatei##*/}"#
-							if [ $renamet != false ]; then
 							if [ $renamet -gt 1 ]; then
 								echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
 								while true
@@ -1344,10 +1344,10 @@ do
 					fi
 				else
 					printErr "XREL.to: Download ist kein Film oder wurde nicht gefunden!"
+					if [ $renamet != false ]; then
 					tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 					film_extension="${tmdb_filmdatei##*.}"
 					film_ganzefilm="${tmdb_filmdatei##*/}"
-					if [ $renamet != false ]; then
 					if [ $renamet -gt 1 ]; then
 						echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
 						while true
@@ -1383,7 +1383,25 @@ do
 				fi
 			fi
 		fi
-
+		
+		if [ $kategorie == true ]; then
+			if [ ! -z $kat ]; then
+			source "$pwd/shine.sh"
+		else
+			echo -e "Keine Kategorie angegeben, bitte wähle:\n1) film\n2) serie\n3) Selber Eingeben\n4) Abbrechen. nach 60  Sekunden wird automatisch abggebrochen"
+			read -t 60 -r -p "" read_kat
+			case "$read_kat" in
+			1) kat=film
+			source "$pwd/shine.sh";;
+			2) kat=serie
+			source "$pwd/shine.sh";;
+			3) echo "Kategorie eingeben:"
+			read -t 30 -r -p "" kat
+			source "$pwd/shine.sh";;
+			4) ;;
+			esac
+			fi
+		fi
 		# ende
 		printLinie
 
@@ -1397,6 +1415,11 @@ do
 		if [ $History == true ]; then
 		datum=$(date +"%y-%m-%d %H:%M:%S")
 		echo "$datum $name" >> $sfdl_logs/History.txt
+		fi
+		if [ $sample_remove == true ]; then
+			for sample in "$(find $pwd/../../downloads -name *sample*)";  do
+				rm -rf -- $sample
+			done
 		fi
 	else
 		if [ "$WEBSERVER" == "ONLINE" ]; then
@@ -1416,7 +1439,7 @@ if [ `ls -a "$sfdl_files"/*.sfdl 2>/dev/null | wc -l` != 0 ] ; then
 	fi
 	printText "INFO:" "Weitere SFDL Dateien gefunden! Starte in 5 Sekunden ..."
 	sleep 5
-	exec "$pwd/bashloader.sh"
+	source "$pwd/bashloader.sh"
 	exit 0
 else
 	printText "Alle Downloads abgeschlossen"

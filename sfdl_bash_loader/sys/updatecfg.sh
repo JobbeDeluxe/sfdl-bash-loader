@@ -23,6 +23,8 @@ sfdl_eigenwerbung=$sfdl_eigenwerbung					# schreibt werbung in den speedreport
 sfdl_chmod=$sfdl_chmod						# Rechte verteilung der Daten nach und während dem download/ nach dem Entpacken
 sfdl_update=$sfdl_update						# ask = fragen, true = immer updaten, false = nicht updaten
 History=$History						# true = es wird in /logs/History.txt der Download verlauf mit Datum angelegt.
+kategorie=$kategorie						#Automatisches sortieren von Filmen und Serein siehe kategorie.cfg
+sample_remove=$sample_remove        #entfernt alle daten im Download ordner die das wort "sample" enthalten. (achtung bei filmen oder sereien die eventuell einen namen mit sample haben.
 #==========================================================================================================
 uscript_folder=\"$uscript_folder\"   			#absoluter Pfad zu script Ordner
 uscript_befor=$uscript_befor               			#Userscript vor dem Download ausführen. true zum aktivieren
