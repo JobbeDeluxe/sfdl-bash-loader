@@ -15,7 +15,7 @@ if [ $kategorie == true ]; then
 	if [ $unterordner == false ]; then
 		mkdir -p "$sfdl_downloads/Speedreports"
 		echo "Verschiebe Film...."
-		mv "$tmdb_filmdatei" "$sfdl_downloads/${!katname}/$film_ganzefilm"
+		find "$sfdl_downloads/$name/" -type f -name "*.$film_extension" -exec mv -t "$sfdl_downloads/${!katname}/" {} +
 		mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/Speedreports/"$name"_speedreport.txt"
 			if [ -d "$sfdl_downloads/$name/kodi" ] && [ $kodi_behalten == true ]; then
 				mv "$sfdl_downloads/$name/kodi" "$sfdl_downloads/${!katname}/kodi_$film_ganzefilm"
