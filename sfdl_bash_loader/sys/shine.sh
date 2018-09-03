@@ -28,4 +28,3 @@ if [ $kategorie == true ]; then
 		mv "$sfdl_downloads/$name" "$sfdl_downloads/${!katname}/$name"
 	fi
 fi
-echo "Film Verschoben: $sfdl_downloads/${!katname}/$film_ganzefilm"
