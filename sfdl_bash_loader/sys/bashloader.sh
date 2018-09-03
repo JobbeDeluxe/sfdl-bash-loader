@@ -1416,6 +1416,11 @@ do
 		datum=$(date +"%y-%m-%d %H:%M:%S")
 		echo "$datum $name" >> $sfdl_logs/History.txt
 		fi
+		if [ $sample_remove == true ]; then
+			for sample in "$(find $pwd/../../downloads -name *sample*)";  do
+				rm -rf -- $sample
+			done
+		fi
 	else
 		if [ "$WEBSERVER" == "ONLINE" ]; then
 			printText "Webinterface ONLINE:" "http://$MYIP:$sfld_status_webserver_port"
