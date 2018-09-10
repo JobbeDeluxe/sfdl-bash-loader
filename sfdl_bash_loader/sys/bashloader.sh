@@ -1157,7 +1157,6 @@ do
 					xrel_imdb_id="$(wget -qO- "http://api.xrel.to/api/release/info.xml?dirname=$name" | grep -o -m1 -P '<uri>imdb:(.*)</uri>' | cut -d '>' -f 2 | cut -d '<' -f 1 | cut -d ':' -f2)"
 					if [ -z "$xrel_imdb_id" ]; then
 						printErr "XREL.to: FEHLER keine IMDB ID gefunden!"
-						continue
 					else
 						printJSON "running" "$ladesfdl" "TMDB.org hole Filminformationen"
 						printText "TMDB.org:" "Speichere API Daten in ... tmdb.json"
