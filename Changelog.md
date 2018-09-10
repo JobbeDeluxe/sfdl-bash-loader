@@ -1,3 +1,6 @@
+3.24:
+- Bugfix: Abbruch der nacharbeiten beim IMDB ID Fehler, behoben.
+
 3.23:
 - Kategorien hinzugefügt
 - Bugfix: Login nicht möglich (Meldung: 530 Not logged in.) #18 Bei nutzen ohne User.
