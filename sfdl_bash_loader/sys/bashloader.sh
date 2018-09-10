@@ -1157,6 +1157,42 @@ do
 					xrel_imdb_id="$(wget -qO- "http://api.xrel.to/api/release/info.xml?dirname=$name" | grep -o -m1 -P '<uri>imdb:(.*)</uri>' | cut -d '>' -f 2 | cut -d '<' -f 1 | cut -d ':' -f2)"
 					if [ -z "$xrel_imdb_id" ]; then
 						printErr "XREL.to: FEHLER keine IMDB ID gefunden!"
+						if [ $renamet != false ]; then
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
+							film_extension="${tmdb_filmdatei##*.}"
+							film_ganzefilm="${tmdb_filmdatei##*/}"
+							if [ $renamet -gt 1 ]; then
+								echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+								while true
+								do
+								read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+								case $inputt in
+    								[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+								echo -e "\033[34mOk\033[0m"
+								break
+								;;
+
+								[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								'')
+ 								echo "Kein Eingabe Gefunden."
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								*)
+								echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 								;;
+								esac
+								done
+							else
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+							fi
+						fi
 					else
 						printJSON "running" "$ladesfdl" "TMDB.org hole Filminformationen"
 						printText "TMDB.org:" "Speichere API Daten in ... tmdb.json"
