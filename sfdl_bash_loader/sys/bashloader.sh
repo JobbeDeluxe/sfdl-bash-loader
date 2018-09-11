@@ -400,7 +400,7 @@ do
 									fi
 
 								else
-										byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+										byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
 								fi
 
 								if [ $byte -ne 0 ]; then
@@ -687,7 +687,7 @@ do
 											fi
 
 										else
-											byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+											byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
 										fi
 									
 										if [ $byte -ne 0 ]; then
