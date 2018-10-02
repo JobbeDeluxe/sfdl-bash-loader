@@ -1224,8 +1224,47 @@ do
 								printText "UTF-8:" "iconv wurde auf dem System nicht gefunden! Konvertieren von UTF-8 nach ASCII nicht moeglich!"
 							fi
 							if [ ! -f "$sfdl_downloads/$name/$tmdb_m_title_c ($tmdb_m_jahr).$film_extension" ]; then
+								if [ -z "tmdb_m_title_c" ]; then
 								printText "TMDB.org:" "Aus $film_ganzefilm wird $tmdb_m_title_c ($tmdb_m_jahr).$film_extension"
 								mv "$sfdl_downloads/$name/$film_ganzefilm" "$sfdl_downloads/$name/$tmdb_m_title_c ($tmdb_m_jahr).$film_extension"
+								else
+									if [ $renamet != false ]; then
+									tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
+									film_extension="${tmdb_filmdatei##*.}"
+									film_ganzefilm="${tmdb_filmdatei##*/}"
+										if [ $renamet -gt 1 ]; then
+										echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+										while true
+										do
+										read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+										case $inputt in
+    										[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+										echo -e "\033[34mOk\033[0m"
+										break
+										;;
+
+										[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+										mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+										break
+										;;
+
+										'')
+ 										echo "Kein Eingabe Gefunden."
+										mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+										break
+										;;
+
+										*)
+										echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 										;;
+										esac
+										done
+										else
+										mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+										fi
+									fi
+								fi
 							fi
 							# lade poster und fanart
 							if [ ! -d "$sfdl_downloads/$name/kodi" ]; then
