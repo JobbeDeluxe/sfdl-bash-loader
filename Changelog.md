@@ -1,5 +1,6 @@
 3.24:
 - Bugfix: Abbruch der nacharbeiten beim IMDB ID Fehler, behoben.
+- Bugfix: tmdb zwar erfolgreich aber Titel ist leer. #24
 
 3.23:
 - Kategorien hinzugefügt
