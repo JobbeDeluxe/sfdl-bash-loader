@@ -400,7 +400,12 @@ do
 									fi
 
 								else
-										byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
+										may_byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
+											if [[ $may_byte =~ ^-?[0-9]+$ ]]; then
+												byte=$may_byte
+											else
+												byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+											fi
 								fi
 
 								if [ $byte -ne 0 ]; then
@@ -687,7 +692,12 @@ do
 											fi
 
 										else
-											byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
+											may_byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
+											if [[ $may_byte =~ ^-?[0-9]+$ ]]; then
+												byte=$may_byte
+											else
+												byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+											fi
 										fi
 									
 										if [ $byte -ne 0 ]; then
