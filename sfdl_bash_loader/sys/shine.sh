@@ -1,6 +1,11 @@
 #!/bin/bash
 
-source "$pwd/kategorie.cfg"
+if [ ! -f "$pwd/"$kat"_kategorie.cfg" ]; then
+	cp "$pwd/kategorie.cfg" "$pwd/"$kat"_kategorie.cfg"
+	source "$pwd/"$kat"_kategorie.cfg"
+else
+source "$pwd/"$kat"_kategorie.cfg"
+fi
 	tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
 	film_extension="${tmdb_filmdatei##*.}"
 	film_ganzefilm="${tmdb_filmdatei##*/}"
