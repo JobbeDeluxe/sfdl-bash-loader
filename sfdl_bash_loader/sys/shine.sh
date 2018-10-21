@@ -14,7 +14,7 @@ if [ $kategorie == true ]; then
 	echo "Kategorie $kat wird genommen und in den Ordner ${!katname} verschoben"
 	if [ $unterordner == false ]; then
 		mkdir -p "$sfdl_downloads/Speedreports"
-		echo "Verschiebe Film...."
+		echo "Verschiebe Datei...."
 		find "$sfdl_downloads/$name/" -type f -name "*.$film_extension" -exec mv -t "$sfdl_downloads/${!katname}/" {} +
 		mv "$sfdl_downloads/$name/speedreport.txt" "$sfdl_downloads/Speedreports/"$name"_speedreport.txt"
 			if [ -d "$sfdl_downloads/$name/kodi" ] && [ $kodi_behalten == true ]; then
