@@ -1,4 +1,5 @@
 3.24:
+- Schönheit: Es wurde aus "Verschiebe Film..." "Verschiebe Datei ..."
 - Bugfix: Ladeanzeige geht manchmal nicht, Doppelprüfung ist jetzt drin. #21
 - Bugfix: Abbruch der nacharbeiten beim IMDB ID Fehler, behoben. #23
 - Bugfix: tmdb zwar erfolgreich aber Titel ist leer. #24
