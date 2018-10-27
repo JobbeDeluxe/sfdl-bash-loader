@@ -39,7 +39,7 @@ Es kann immer nur EINE Kategorie pro Download angegeben werden. Alle sfdl im ord
 
 Es wird beim start mit einer Kategorie eine neue loader.cfg datei angelegt mit "katname_" davor. Diese kann mit allen einstellungen aus der normalen loader datei gefüllt werden. Diese werden dann Vorrangig benutzt. Beachte das die einstellungen der original loader.cfg damit überschrieben werden.
 
-Es wird auch eine "katname_"kategorie.cfg angelegt. Diese muss Komplettausgefüllt sein da sie für die eingegebene kategorie genutzt wird. Wichtig ist der Pfad der kategorie. Dieser muss nur für die genutzte kat verfügbar sein
+Es wird auch eine "katname_"kategorie.cfg angelegt. Diese kann mit allen einstellungen aus der normalen kategorie datei gefüllt werden. Diese werden dann Vorrangig benutzt.
 
 
 ## Kompatibilität (getestet)
