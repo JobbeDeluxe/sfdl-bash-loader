@@ -37,6 +37,13 @@ ppwd="$(dirname "$pwd")"
 
 # lade config
 source "$pwd/loader.cfg"
+if [ ! -z $kat ]; then 
+	if [ -f "$pwd/"$kat"_loader.cfg" ]; then
+		source "$pwd/"$kat"_loader.cfg"
+	else
+		touch "$pwd/"$kat"_loader.cfg"
+	fi
+fi
 
 # macht das bild sauber
 if [ $debug == false ]; then
