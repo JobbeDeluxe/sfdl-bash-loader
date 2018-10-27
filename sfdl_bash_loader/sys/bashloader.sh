@@ -41,7 +41,7 @@ if [ ! -z $kat ]; then
 	if [ -f "$pwd/"$kat"_loader.cfg" ]; then
 		source "$pwd/"$kat"_loader.cfg"
 	else
-		cp "$pwd/loader.cfg" "$pwd/"$kat"_loader.cfg"
+		touch "$pwd/"$kat"_loader.cfg"
 	fi
 fi
 
