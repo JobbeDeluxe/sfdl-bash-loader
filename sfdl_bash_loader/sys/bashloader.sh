@@ -12,7 +12,7 @@
 # 8888888P" d88P     888  "Y8888P"  888    888        88888888 "Y88P"  "Y888888  "Y88888  "Y8888  888
 # ==========================================================================================================
 # sfdl bash loader version
-sfdl_version="3.23"
+sfdl_version="3.24"
 
 # pfad definieren
 IFSDEFAULT=$IFS
@@ -37,6 +37,13 @@ ppwd="$(dirname "$pwd")"
 
 # lade config
 source "$pwd/loader.cfg"
+if [ ! -z $kat ]; then 
+	if [ -f "$pwd/"$kat"_loader.cfg" ]; then
+		source "$pwd/"$kat"_loader.cfg"
+	else
+		touch "$pwd/"$kat"_loader.cfg"
+	fi
+fi
 
 # macht das bild sauber
 if [ $debug == false ]; then
@@ -400,7 +407,12 @@ do
 									fi
 
 								else
-										byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+										may_byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
+											if [[ $may_byte =~ ^-?[0-9]+$ ]]; then
+												byte=$may_byte
+											else
+												byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+											fi
 								fi
 
 								if [ $byte -ne 0 ]; then
@@ -687,7 +699,12 @@ do
 											fi
 
 										else
-											byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+											may_byte="$(echo $line | tr -s ' '| cut -d ' ' -f3)"
+											if [[ $may_byte =~ ^-?[0-9]+$ ]]; then
+												byte=$may_byte
+											else
+												byte="$(echo $line | grep -oP "\s+\K\d*\d" | sed q)"
+											fi
 										fi
 									
 										if [ $byte -ne 0 ]; then
@@ -1157,7 +1174,42 @@ do
 					xrel_imdb_id="$(wget -qO- "http://api.xrel.to/api/release/info.xml?dirname=$name" | grep -o -m1 -P '<uri>imdb:(.*)</uri>' | cut -d '>' -f 2 | cut -d '<' -f 1 | cut -d ':' -f2)"
 					if [ -z "$xrel_imdb_id" ]; then
 						printErr "XREL.to: FEHLER keine IMDB ID gefunden!"
-						continue
+						if [ $renamet != false ]; then
+							tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
+							film_extension="${tmdb_filmdatei##*.}"
+							film_ganzefilm="${tmdb_filmdatei##*/}"
+							if [ $renamet -gt 1 ]; then
+								echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+								while true
+								do
+								read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+								case $inputt in
+    								[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+								echo -e "\033[34mOk\033[0m"
+								break
+								;;
+
+								[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								'')
+ 								echo "Kein Eingabe Gefunden."
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+								break
+								;;
+
+								*)
+								echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 								;;
+								esac
+								done
+							else
+								mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+							fi
+						fi
 					else
 						printJSON "running" "$ladesfdl" "TMDB.org hole Filminformationen"
 						printText "TMDB.org:" "Speichere API Daten in ... tmdb.json"
@@ -1189,8 +1241,47 @@ do
 								printText "UTF-8:" "iconv wurde auf dem System nicht gefunden! Konvertieren von UTF-8 nach ASCII nicht moeglich!"
 							fi
 							if [ ! -f "$sfdl_downloads/$name/$tmdb_m_title_c ($tmdb_m_jahr).$film_extension" ]; then
+								if [ -z "tmdb_m_title_c" ]; then
 								printText "TMDB.org:" "Aus $film_ganzefilm wird $tmdb_m_title_c ($tmdb_m_jahr).$film_extension"
 								mv "$sfdl_downloads/$name/$film_ganzefilm" "$sfdl_downloads/$name/$tmdb_m_title_c ($tmdb_m_jahr).$film_extension"
+								else
+									if [ $renamet != false ]; then
+									tmdb_filmdatei="$(find "$sfdl_downloads/$name/" -type f | xargs -d '\n' ls -S | head -1)"
+									film_extension="${tmdb_filmdatei##*.}"
+									film_ganzefilm="${tmdb_filmdatei##*/}"
+										if [ $renamet -gt 1 ]; then
+										echo -e "Aus \033[34m$film_ganzefilm\033[0m wird \033[32m$dateiname.$film_extension\033[0m \033[31mAbbrechen? Automatische umbennenung in $renamet Sekunden\033[0m"
+										while true
+										do
+										read -t $renamet -r -p "Abbrechen? [J/n] " inputt
+
+										case $inputt in
+    										[yY][eE][sS]|[yY]|[Jj][Aa]|[Jj])
+										echo -e "\033[34mOk\033[0m"
+										break
+										;;
+
+										[nN][oO]|[nN]|[Nn][Ee][Ii][Nn])
+										mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+										break
+										;;
+
+										'')
+ 										echo "Kein Eingabe Gefunden."
+										mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+										break
+										;;
+
+										*)
+										echo -e "\033[31mFalsche Eingabe...'$input'\033[0m"
+ 										;;
+										esac
+										done
+										else
+										mv "$tmdb_filmdatei" "$sfdl_downloads/$name/$dateiname.$film_extension"
+										fi
+									fi
+								fi
 							fi
 							# lade poster und fanart
 							if [ ! -d "$sfdl_downloads/$name/kodi" ]; then

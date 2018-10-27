@@ -124,6 +124,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		cp -rf "$pwd/sys/loader.cfg" "$pwd/backup/loader.cfg.bak"
 		cp -rf "$pwd/sys/passwords.txt" "$pwd/backup/passwords.txt"
 		cp -rf "$pwd/sys/kategorie.cfg" "$pwd/backup/kategorie.cfg"
+		cp -rf "$pwd/sys/*_*.cfg" "$pwd/backup/*_*.cfg"
 		if [ -f "$pwd/sys/logs/History.txt" ]; then
 			cp -rf "$pwd/sys/logs/History.txt" "$pwd/backup/History.txt"
 		fi
@@ -151,6 +152,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		"$pwd/sys/updatecfg.sh" "$pwd/backup/loader.cfg.new" "$pwd/backup/loader.cfg.bak" "$pwd/sys/force.cfg" "$pwd/sys/loader.cfg"
 		cp -rf "$pwd/backup/passwords.txt" "$pwd/sys/passwords.txt"
 		cp -rf "$pwd/backup/kategorie.cfg" "$pwd/sys/kategorie.cfg"
+		cp -rf "$pwd/backup/*_*.cfg" "$pwd/sys/*_*.cfg
 		if [ -f "$pwd/backup/History.txt" ]; then
 			cp -rf "$pwd/backup/History.txt" "$pwd/sys/logs/History.txt"
 		fi
