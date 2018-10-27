@@ -1,8 +1,8 @@
 #!/bin/bash
 
+source "$pwd/"kategorie.cfg"
 if [ ! -f "$pwd/"$kat"_kategorie.cfg" ]; then
-	cp "$pwd/kategorie.cfg" "$pwd/"$kat"_kategorie.cfg"
-	source "$pwd/"$kat"_kategorie.cfg"
+	touch "$pwd/"$kat"_kategorie.cfg"
 else
 source "$pwd/"$kat"_kategorie.cfg"
 fi
