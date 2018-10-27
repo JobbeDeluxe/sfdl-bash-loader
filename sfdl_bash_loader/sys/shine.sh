@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$pwd/"kategorie.cfg"
+source "$pwd/kategorie.cfg"
 if [ ! -f "$pwd/"$kat"_kategorie.cfg" ]; then
 	touch "$pwd/"$kat"_kategorie.cfg"
 else
