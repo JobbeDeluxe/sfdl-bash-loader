@@ -124,7 +124,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		cp -rf "$pwd/sys/loader.cfg" "$pwd/backup/loader.cfg.bak"
 		cp -rf "$pwd/sys/passwords.txt" "$pwd/backup/passwords.txt"
 		cp -rf "$pwd/sys/kategorie.cfg" "$pwd/backup/kategorie.cfg"
-		find $pwd/sys/ -maxdepth 1 -name '*_*.cfg' \
+		find "$pwd/sys/" -maxdepth 1 -name '*_*.cfg' \
 			-exec echo cp \'{}\' \'$pwd/backup/\' \; > "$pwd/backup/mycfg.sh"
 			exec "$pwd/backup/mycfg.sh"
 		if [ -f "$pwd/sys/logs/History.txt" ]; then
@@ -154,7 +154,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		"$pwd/sys/updatecfg.sh" "$pwd/backup/loader.cfg.new" "$pwd/backup/loader.cfg.bak" "$pwd/sys/force.cfg" "$pwd/sys/loader.cfg"
 		cp -rf "$pwd/backup/passwords.txt" "$pwd/sys/passwords.txt"
 		cp -rf "$pwd/backup/kategorie.cfg" "$pwd/sys/kategorie.cfg"
-		find $pwd/backup/ -maxdepth 1 -name '*_*.cfg' \
+		find "$pwd/backup/" -maxdepth 1 -name '*_*.cfg' \
 			-exec echo cp \'{}\' \'$pwd/sys/\' \; > "$pwd/backup/mycfg.sh"
 			exec "$pwd/backup/mycfg.sh"
 		if [ -f "$pwd/backup/History.txt" ]; then
