@@ -126,7 +126,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		cp -rf "$pwd/sys/kategorie.cfg" "$pwd/backup/kategorie.cfg"
 		find "$pwd/sys/" -maxdepth 1 -name '*_*.cfg' \
 			-exec echo cp \'{}\' \'$pwd/backup/\' \; > "$pwd/backup/mycfg.sh"
-			exec "$pwd/backup/mycfg.sh"
+			source "$pwd/backup/mycfg.sh"
 		if [ -f "$pwd/sys/logs/History.txt" ]; then
 			cp -rf "$pwd/sys/logs/History.txt" "$pwd/backup/History.txt"
 		fi
@@ -156,7 +156,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 		cp -rf "$pwd/backup/kategorie.cfg" "$pwd/sys/kategorie.cfg"
 		find "$pwd/backup/" -maxdepth 1 -name '*_*.cfg' \
 			-exec echo cp \'{}\' \'$pwd/sys/\' \; > "$pwd/backup/mycfg.sh"
-			exec "$pwd/backup/mycfg.sh"
+			source "$pwd/backup/mycfg.sh"
 		if [ -f "$pwd/backup/History.txt" ]; then
 			cp -rf "$pwd/backup/History.txt" "$pwd/sys/logs/History.txt"
 		fi
