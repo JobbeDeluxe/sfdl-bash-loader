@@ -119,7 +119,7 @@ if [ $(($version_local)) -lt $(($version_repo)) ]; then
 	
 	if [ -d "$pwd/sys" ]; then
 		echo "| Konfiguration speichern..."
-		mkdir "$pwd/backup/"
+		mkdir -p "$pwd/backup/"
 		cp -rf "$pwd/sys/userscript" "$pwd/backup/userscript"
 		cp -rf "$pwd/sys/loader.cfg" "$pwd/backup/loader.cfg.bak"
 		cp -rf "$pwd/sys/passwords.txt" "$pwd/backup/passwords.txt"
