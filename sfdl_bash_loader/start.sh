@@ -364,6 +364,15 @@ chkTools()
 		fi
 	fi
 	
+	# findutils
+	if [ $osxcheck == "Darwin" ]; then
+		if hash gfind 2>/dev/null; then
+			findutils=1
+		else
+			installTools+=($(echo "findutils "))
+		fi
+	fi
+	
 	if [ ! -z "$1" ]; then
 		if [ "$1" == "true" ]; then
 			echo "| -- TOOLS ----------------------------- "
@@ -387,6 +396,7 @@ chkTools()
 			echo "| netcat:  $netcat"
 			if [ $osxcheck == "Darwin" ]; then
 				echo "| brew:    $brew"
+				echo "| findutils: $findutils"
 			fi
 			echo "| -------------------------------------- "
 			echo "| tools fehlen: ${#installTools[@]}"
