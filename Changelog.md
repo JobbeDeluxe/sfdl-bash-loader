@@ -1,3 +1,7 @@
+3.25:
+- Bugfix: wget threat anzeige fehler
+- Add: macos speicher berechnung
+
 3.24:
 - Add: eigene cfg datei für laoder und kategorie.cfg beim benutzen von kategorie
 - Schönheit: Es wurde aus "Verschiebe Film..." "Verschiebe Datei ..."
