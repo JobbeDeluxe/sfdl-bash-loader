@@ -1,4 +1,5 @@
 3.25:
+- Bugfix: netcat entfernt, da nicht nötig
 - Bugfix: wget threat anzeige fehler
 - Add: macos speicher berechnung
 
