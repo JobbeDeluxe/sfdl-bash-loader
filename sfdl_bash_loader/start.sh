@@ -377,7 +377,6 @@ chkTools()
 			#echo "| phpcgi:  $phpcgi"
 			echo "| source:  $source"
 			echo "| base64:  $base64"
-			echo "| netcat:  $netcat"
 			if [ $osxcheck == "Darwin" ]; then
 				echo "| brew:    $brew"
 				echo "| findutils: $findutils"
@@ -411,13 +410,14 @@ if [ "${#installTools[@]}" != 0 ]; then
 				usesudo=1
 				while [[ -z "$sudopass" ]]
 				do
-					read -p "| Bitte SUDO Passwort eingeben: " sudopass
+					read -p "| Bitte SUDO Passwort eingeben: " -r -s sudopass
 				done
 			fi
 			if [ $usesudo == 1 ]; then
 				echo "| Es wird installiert.... Bitte Warten"
 				echo $sudopass | sudo -S apt-get --yes --force-yes install ${installTools[@]} > /dev/null
 			else
+				echo "| Es wird installiert.... Bitte Warten"
 				apt-get --yes --force-yes install ${installTools[@]} > /dev/null
 			fi
 		else
