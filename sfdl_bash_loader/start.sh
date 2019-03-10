@@ -348,19 +348,12 @@ chkTools()
 		installTools+=($(echo "base64 "))
 	fi
 	
-	# netcat-openbsd
-	netcat=0
+	# findutils
 	if [ $osxcheck == "Darwin" ]; then
-		if hash nc 2>/dev/null; then
-			netcat=1
+		if hash gfind 2>/dev/null; then
+			findutils=1
 		else
-			installTools+=($(echo "netcat "))
-		fi
-	else
-		if hash nc.openbsd 2>/dev/null; then
-			netcat=1
-		else
-			installTools+=($(echo "netcat-openbsd "))
+			installTools+=($(echo "findutils "))
 		fi
 	fi
 	
@@ -384,9 +377,9 @@ chkTools()
 			#echo "| phpcgi:  $phpcgi"
 			echo "| source:  $source"
 			echo "| base64:  $base64"
-			echo "| netcat:  $netcat"
 			if [ $osxcheck == "Darwin" ]; then
 				echo "| brew:    $brew"
+				echo "| findutils: $findutils"
 			fi
 			echo "| -------------------------------------- "
 			echo "| tools fehlen: ${#installTools[@]}"
@@ -417,13 +410,14 @@ if [ "${#installTools[@]}" != 0 ]; then
 				usesudo=1
 				while [[ -z "$sudopass" ]]
 				do
-					read -p "| Bitte SUDO Passwort eingeben: " sudopass
+					read -p "| Bitte SUDO Passwort eingeben: " -r -s sudopass
 				done
 			fi
 			if [ $usesudo == 1 ]; then
 				echo "| Es wird installiert.... Bitte Warten"
 				echo $sudopass | sudo -S apt-get --yes --force-yes install ${installTools[@]} > /dev/null
 			else
+				echo "| Es wird installiert.... Bitte Warten"
 				apt-get --yes --force-yes install ${installTools[@]} > /dev/null
 			fi
 		else

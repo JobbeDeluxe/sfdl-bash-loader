@@ -1,3 +1,9 @@
+3.25:
+- Bugfix: sudo password Eingabe versteckt und Install meldung hinzugefügt
+- Bugfix: netcat entfernt, da nicht nötig
+- Bugfix: wget threat anzeige fehler
+- Add: macos speicher berechnung
+
 3.24:
 - Add: eigene cfg datei für laoder und kategorie.cfg beim benutzen von kategorie
 - Schönheit: Es wurde aus "Verschiebe Film..." "Verschiebe Datei ..."
