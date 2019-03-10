@@ -348,22 +348,6 @@ chkTools()
 		installTools+=($(echo "base64 "))
 	fi
 	
-	# netcat-openbsd
-	netcat=0
-	if [ $osxcheck == "Darwin" ]; then
-		if hash nc 2>/dev/null; then
-			netcat=1
-		else
-			installTools+=($(echo "netcat "))
-		fi
-	else
-		if hash nc.openbsd 2>/dev/null; then
-			netcat=1
-		else
-			installTools+=($(echo "netcat-openbsd "))
-		fi
-	fi
-	
 	# findutils
 	if [ $osxcheck == "Darwin" ]; then
 		if hash gfind 2>/dev/null; then
